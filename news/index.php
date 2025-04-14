@@ -5,21 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../style.css">
+    <script>
+        function loadMenu() {
+    fetch('../menu.html')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.text();
+        })
+        .then(data => {
+            document.getElementById('mysiteMenu').innerHTML = data;
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+}
+window.onload = loadMenu;
+    </script>
     <title>اخبار</title>
 </head>
 <body dir="rtl">
 
 <!--Menu-->
-<nav class="siteMenu">
-    <div>
-        <a href="index.html"><div>صفحه اصلی</div></a>
-        <a style="cursor: pointer;" onclick="ToogleMenu()"><div>منو</div></a>
-        <a href="shop/index.html"><div>فروشگاه ما</div></a>
-        <a href="news/index.php"><div>اخبار</div></a>
-        <a href="#"><div>ارتباط با ما</div></a>
-        <a href="#"><div>درباره ما</div></a>
-    </div>
-</nav>
+<nav id="mysiteMenu"></nav>
 <div class="MobileMenu">
     <span>Menu</span>
 </div>
@@ -29,17 +38,25 @@
         موضوعات روز درباره باشگاه
     </div>
     <div class="links" align="center">
-        <table border="0" class="linksTable">
-            <tr>
-                <td>باشگاه با افتخار اعلام میکند که او عالی است</td>
-                <td><a href="#">ادامه مطلب</a></td>
-            </tr>
-        </table>
+        <?php
+        include('..\\modules\\GetNews.php');
+        $mydb = new NewsRecieve();
+        $pagenumber = $mydb->newsGet();
+        echo '<table border="0" class="linksTable">';
+        while ($row = $pagenumber->fetch_assoc()) {
+                    echo '<tr>';
+                    echo '<td>'.$row['header'].'</td>';
+                    echo "<td><a href=ThePage.php?pagenumber=".$row['pagenumb'].">ادامه مطلب</a></td>";
+                    echo '</tr>';
+                }
+        echo '</table>';
+        ?>
     </div>
     <div class="end">
         end
     </div>
 </div>
 
+<script src="script.js"></script>
 </body>
 </html>

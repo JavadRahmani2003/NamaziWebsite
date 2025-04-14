@@ -17,9 +17,13 @@ body {
 .links {
     background-color: rgb(194, 32, 32);
 }
-.linksTable tr td {
-    padding: 10%;
+.linksTable {
     font-size: 30px;
+}
+.linksTable tr td {
+    padding: 10px;
+    font-size: 30px;
+    width: 50%;
 }
 .linksTable tr td a {
     padding: 10%;

@@ -5,8 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
+    <script>
+        function loadMenu() {
+    fetch('../menu.html')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.text();
+        })
+        .then(data => {
+            document.getElementById('mysiteMenu').innerHTML = data;
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+    }
+    window.onload = loadMenu;
+    </script>
 </head>
 <body dir="rtl">
+
+<!--Menu-->
+<nav id="mysiteMenu"></nav>
 
 <script src="script.js"></script>
 </body>
