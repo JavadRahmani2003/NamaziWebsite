@@ -8,11 +8,10 @@ class NewsRecieve {
         return $result;
     }
     public function newsGetbyId() {
-        $pagenumb = intval($_GET['pagenumb']);
         $mydb = new Database('localhost','root','','newsdatabase');
         $mydb->connect();
-        $stmt = $mydb->dbComunicate("SELECT thebody FROM news where pagenumb=?");
-        $stmt->bind_param("i",$pagenumb);
+        $stmt = $mydb->dbComunicate("SELECT thebody FROM news where pagenumb=");
+        $stmt->bind_param("?",$mydb);
         $stmt->execute();
         $result = $stmt->get_result();
         if ($result->num_rows > 0) {

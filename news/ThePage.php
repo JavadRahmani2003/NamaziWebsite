@@ -5,27 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../style.css">
-    <title>صفحه اخبار - <?php include('..\\modules\\GetNews.php');
-        $mydb = new NewsRecieve();
-        $pagenumber = $mydb->newsGetbyId(); htmlspecialchars($pagenumber['header']) ?></title>
+    <script>
+        function loadMenu() {
+    fetch('../menu.html')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.text();
+        })
+        .then(data => {
+            document.getElementById('mysiteMenu').innerHTML = data;
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+    }
+    window.onload = loadMenu;
+    </script>
+    <title>صفحه اخبار</title>
 </head>
 <body>
 <!--Menu-->
-<nav class="siteMenu">
-    <div>
-        <a href="index.html"><div>صفحه اصلی</div></a>
-        <a style="cursor: pointer;" onclick="ToogleMenu()"><div>منو</div></a>
-        <a href="shop/"><div>فروشگاه</div></a>
-        <a href="news/"><div>اخبار</div></a>
-        <a href="#"><div>ارتباط با ما</div></a>
-        <a href="#"><div>درباره ما</div></a>
-    </div>
-</nav>
+<nav class="mysiteMenu"></nav>
 <div class="MobileMenu">
     <span>Menu</span>
 </div>
-<!--Menu-->
-
+<?php 
+    include('..\\modules\\GetNews.php');
+    $mydb = new NewsRecieve();
+    $pagenumber = $mydb->newsGetbyId(); $pagenumber['header']
+?>
 <div class="MainBar" style="margin-top: 70px;">
     <div class="Title">
         موضوعات روز درباره باشگاه
@@ -33,7 +43,7 @@
     <div class="links" align="center">
         <?php
         echo '   <div class="linksTable">';
-        echo '       <td>'.htmlspecialchars($pagenumber['thebody']).'</td>';
+        echo '       <td>'.$pagenumber['thebody'].'</td>';
         echo '   </div>';
         ?>
     </div>
