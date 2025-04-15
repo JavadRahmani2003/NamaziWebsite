@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../style.css">
     <script>
-        function loadMenu() {
+    function loadMenu() {
     fetch('../menu.html')
         .then(response => {
             if (!response.ok) {
@@ -31,19 +31,17 @@
 <div class="MobileMenu">
     <span>Menu</span>
 </div>
-<?php 
-    include('..\\modules\\GetNews.php');
-    $mydb = new NewsRecieve();
-    $pagenumber = $mydb->newsGetbyId(); $pagenumber['header']
-?>
 <div class="MainBar" style="margin-top: 70px;">
     <div class="Title">
         موضوعات روز درباره باشگاه
     </div>
     <div class="links" align="center">
-        <?php
+        <?php        
+        include("..\\modules\\GetNews.php");
+        $result = new NewsRecieve;
+        $pagenumber = $result->newsGetById($_GET['pagenumber']);
         echo '   <div class="linksTable">';
-        echo '       <td>'.$pagenumber['thebody'].'</td>';
+        echo '       <td>'.$pagenumber.'</td>';
         echo '   </div>';
         ?>
     </div>
@@ -54,14 +52,4 @@
 
 <script src="script.js"></script>
 </body>
-</html><!-- 
-
-<?php
-/*include("..\\modules\\connectToDb.php");
-$result = new Database('localhost','root','','newsDatabase');
-$result->connect();
-if ($_GET['id'])
-{
-    
-}*/
-?> -->
+</html>
