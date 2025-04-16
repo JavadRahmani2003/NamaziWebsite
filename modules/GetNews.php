@@ -18,6 +18,5 @@ class NewsRecieve {
             $row = $result->fetch_assoc();
             echo $row['thebody'];
         }
-        $stmt->close();
     }
 }

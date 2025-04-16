@@ -41,7 +41,10 @@
         موضوعات روز درباره باشگاه
     </div>
     <div class="links" align="center">
-        <?php
+        <?php        
+        include("..\\modules\\GetNews.php");
+        $result = new NewsRecieve;
+        $pagenumber = $result->newsGetById($_GET['pagenumber']);
         echo '   <div class="linksTable">';
         echo '       <td>'.$pagenumber['thebody'].'</td>';
         echo '   </div>';
@@ -54,14 +57,4 @@
 
 <script src="script.js"></script>
 </body>
-</html><!-- 
-
-<?php
-/*include("..\\modules\\connectToDb.php");
-$result = new Database('localhost','root','','newsDatabase');
-$result->connect();
-if ($_GET['id'])
-{
-    
-}*/
-?> -->
+</html>
