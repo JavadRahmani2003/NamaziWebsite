@@ -33,7 +33,7 @@ body {
     width: 50%;
 }
 .linksTable tr td {
-    padding: 10%;
+    padding: 10px 10%;
     width: 5%;
     font-size: 30px;
 }
@@ -48,7 +48,7 @@ a {
     width: 20%;
     height: 90%;
     overflow: hidden;
-    margin-top: 70px;
+    margin-top: 50px;
     float: left;
     text-align: center;
     position: fixed;

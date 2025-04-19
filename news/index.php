@@ -49,14 +49,16 @@
                 echo '<td>'.$row['header'].'</td>';
                 echo "<td><a href=ThePage.php?pagenumber=".$row['pagenumb'].">ادامه مطلب</a></td>";
                 echo '</tr>';
-            echo '</table>';
+            }
             ?>
         </div>
     </section>
-    <section class="TheFastLinks">
+    <section class="fastLinkEnd">
         <div class="fastLink">
-        <?php
-                echo "<a style='background-color:#e63946;color:#aaa;border-radius:5px;padding:5px' href=ThePage.php?pagenumber=".$row['pagenumb'].">".$row['header']."</a>";
+            <?php
+            $mypagenumber = $mydb->returnQueryFromDb();
+            while ($row = $mypagenumber->fetch_assoc()) {
+               echo "<a style='background-color:#e63946;color:#aaa;border-radius:5px;padding:5px' href='ThePage.php?pagenumber=".$row['pagenumb']."'>".$row['header']."</a><br><br>";
             }
             echo '</table>';
             ?>
