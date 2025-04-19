@@ -8,26 +8,51 @@ body {
 }
 .MainBar {
     width: 100%;
-    text-align: center;
+    text-align: right;
+}
+.MainSeperators {
+    width: 80%;
+    padding: 20px;
+    float: right;
 }
 .Title {
-    background-color: rgb(25, 116, 221);
+    padding: 20px;
+    text-align: center;
     font-size: 30px;
 }
 .links {
-    background-color: rgb(194, 32, 32);
+    width: 100%;
+    font-size: 15px;
+    padding: 30px;
 }
 .linksTable {
-    font-size: 30px;
+    font-size: 23px;
+    margin: auto;
 }
-.linksTable tr td {
-    padding: 10px;
-    font-size: 30px;
+.linksTable tr {
     width: 50%;
 }
-.linksTable tr td a {
+.linksTable tr td {
     padding: 10%;
+    width: 5%;
     font-size: 30px;
+}
+.linksTable tr td a {
+    padding: 5%;
+    font-size: 25px;
+}
+a {
+    color: #e63946;
+}
+.fastLink {
+    width: 20%;
+    height: 90%;
+    overflow: hidden;
+    margin-top: 70px;
+    float: left;
+    text-align: center;
+    position: fixed;
+    left: 0;
 }
 .end {
     background-color: rgb(89, 73, 236);    

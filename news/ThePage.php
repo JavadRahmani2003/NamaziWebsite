@@ -6,8 +6,8 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../style.css">
     <script>
-        function loadMenu() {
-    fetch('../menu.html')
+    function loadMenu() {
+        fetch('../menu.html')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok ' + response.statusText);
@@ -25,36 +25,46 @@
     </script>
     <title>صفحه اخبار</title>
 </head>
-<body>
+<body dir="rtl">
 <!--Menu-->
-<nav class="mysiteMenu"></nav>
+<nav id="mysiteMenu"></nav>
 <div class="MobileMenu">
     <span>Menu</span>
 </div>
-<?php 
-    include('..\\modules\\GetNews.php');
-    $mydb = new NewsRecieve();
-    $pagenumber = $mydb->newsGetbyId(); $pagenumber['header']
-?>
+
 <div class="MainBar" style="margin-top: 70px;">
-    <div class="Title">
-        موضوعات روز درباره باشگاه
-    </div>
-    <div class="links" align="center">
-        <?php        
-        include("..\\modules\\GetNews.php");
-        $result = new NewsRecieve;
-        $pagenumber = $result->newsGetById($_GET['pagenumber']);
-        echo '   <div class="linksTable">';
-        echo '       <td>'.$pagenumber['thebody'].'</td>';
-        echo '   </div>';
-        ?>
-    </div>
-    <div class="end">
-        end
-    </div>
+    <section class="MainSeperators">
+        <div class="Title">
+            موضوعات روز درباره باشگاه
+        </div>
+        <div class="links">
+            <?php
+            include("..\\modules\\GetNews.php");
+            $result = new NewsRecieve;
+            $pagenumber = $result->newsGetById($_GET['pagenumber']);
+            foreach ($pagenumber as $pagenumbers) {
+                echo '   <div class="linksTable">';
+                echo '       <td>'.$pagenumbers['thebody'].'</td>';
+                echo '   </div>';
+            }
+            ?>
+        </div>
+    </section>
+    <section class="TheFastLinks">
+        <div class="fastLink">
+        <?php
+            $mypagenumber = $result->returnQueryFromDb();
+            echo '<table border="0" class="linksTable">';
+            while ($row = $mypagenumber->fetch_assoc()) {
+                echo "<a style='background-color:#e63946;color:#aaa;border-radius:5px;padding:5px' href=ThePage.php?pagenumber=".$row['pagenumb'].">".$row['header']."</a><br><br>";
+            }
+            echo '</table>';
+            ?>
+        </div>
+    </section>
 </div>
 
+<script src="../script.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
