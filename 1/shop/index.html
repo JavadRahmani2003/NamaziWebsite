@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>فروشگاه - باشگاه ورزشی آرین رزم</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<script>
+    function loadMenu() {
+    fetch('../menu.html')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.text();
+        })
+        .then(data => {
+            document.getElementById('mysiteMenu').innerHTML = data;
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+    }
+    window.onload = loadMenu;
+</script>
+</head>
+<body dir="rtl" id="lighttheme">
+
+    <!-- منوی اصلی -->
+<nav id="mysiteMenu"></nav>
+<!-- <header class="header">
+    <div class="container">
+        <div class="logo">
+            <a href="index.html">
+                <img src="/placeholder.svg?height=60&width=150" alt="لوگوی باشگاه آرین رزم">
+            </a>
+        </div>
+            <ul>
+                <li><a href="index.html">صفحه اصلی</a></li>
+                <li><a href="#">درباره ما</a></li>
+                <li><a href="#">کلاس‌ها</a></li>
+                <li><a href="#">مربیان</a></li>
+                <li><a href="shop.html" class="active">فروشگاه</a></li>
+                <li><a href="#">اخبار</a></li>
+                <li><a href="#">تماس با ما</a></li>
+            </ul>
+        <div class="header-actions">
+            <a href="login.html" class="login-btn">ورود / ثبت نام</a>
+            <div class="theme-toggle" onclick="toggleTheme()">
+                <i class="fas fa-moon"></i>
+            </div>
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </div>
+</header> -->
+
+<!-- سبد خرید کوچک -->
+<div class="mini-cart" onclick="window.location.href='cart.php'">
+    <i class="fas fa-shopping-cart"></i>
+    <div class="cart-count">0</div>
+</div>
+
+<!-- محتوای اصلی فروشگاه -->
+<div class="shop-container">
+    <!-- هدر فروشگاه -->
+    <div class="shop-header">
+        <div class="shop-header-content">
+            <h1 class="shop-title">فروشگاه تجهیزات ورزشی آرین رزم</h1>
+            <p class="shop-subtitle">بهترین تجهیزات ورزشی با کیفیت عالی و قیمت مناسب</p>
+            <div class="shop-search">
+                <input type="text" placeholder="جستجوی محصولات...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- محتوای فروشگاه -->
+    <div class="shop-content">
+        <!-- فیلترها -->
+        <div class="shop-filters">
+            <div class="filter-categories">
+                <div class="filter-category active">همه</div>
+                <div class="filter-category">لباس رزمی</div>
+                <div class="filter-category">کفش</div>
+                <div class="filter-category">محافظ</div>
+                <div class="filter-category">تجهیزات تمرینی</div>
+                <div class="filter-category">اکسسوری</div>
+            </div>
+            <div class="filter-sort">
+                <select>
+                    <option value="newest">جدیدترین</option>
+                    <option value="popular">محبوب‌ترین</option>
+                    <option value="price_low">قیمت: کم به زیاد</option>
+                    <option value="price_high">قیمت: زیاد به کم</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- محصولات -->
+        <div class="products-grid">
+            <!-- محصول 1 -->
+            <div class="product-card">
+                <div class="product-badge">جدید</div>
+                <div class="product-image">
+                    <img src="/placeholder.svg?height=300&width=300" alt="لباس کاراته">
+                </div>
+                <div class="product-info">
+                    <div class="product-category">لباس رزمی</div>
+                    <h3 class="product-title">لباس کاراته آدیداس مدل K220</h3>
+                    <div class="product-price">
+                        <div class="current-price">850,000 تومان</div>
+                        <div class="old-price">950,000 تومان</div>
+                    </div>
+                    <div class="product-rating">
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <div class="rating-count">(24)</div>
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn-add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            افزودن به سبد
+                        </button>
+                        <button class="btn-quick-view" onclick="openQuickView(1)">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- محصول 2 -->
+            <div class="product-card">
+                <div class="product-badge">پرفروش</div>
+                <div class="product-image">
+                    <img src="/placeholder.svg?height=300&width=300" alt="دستکش بوکس">
+                </div>
+                <div class="product-info">
+                    <div class="product-category">محافظ</div>
+                    <h3 class="product-title">دستکش بوکس چرم طبیعی 12 انس</h3>
+                    <div class="product-price">
+                        <div class="current-price">750,000 تومان</div>
+                        <div class="old-price">820,000 تومان</div>
+                    </div>
+                    <div class="product-rating">
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="rating-count">(36)</div>
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn-add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            افزودن به سبد
+                        </button>
+                        <button class="btn-quick-view" onclick="openQuickView(2)">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- محصول 3 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="/placeholder.svg?height=300&width=300" alt="کفش تکواندو">
+                </div>
+                <div class="product-info">
+                    <div class="product-category">کفش</div>
+                    <h3 class="product-title">کفش تکواندو آدیداس مدل فایتر</h3>
+                    <div class="product-price">
+                        <div class="current-price">680,000 تومان</div>
+                    </div>
+                    <div class="product-rating">
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <div class="rating-count">(18)</div>
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn-add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            افزودن به سبد
+                        </button>
+                        <button class="btn-quick-view" onclick="openQuickView(3)">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- محصول 4 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="/placeholder.svg?height=300&width=300" alt="محافظ سینه">
+                </div>
+                <div class="product-info">
+                    <div class="product-category">محافظ</div>
+                    <h3 class="product-title">محافظ سینه تکواندو استاندارد مسابقات</h3>
+                    <div class="product-price">
+                        <div class="current-price">580,000 تومان</div>
+                        <div class="old-price">650,000 تومان</div>
+                    </div>
+                    <div class="product-rating">
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <div class="rating-count">(12)</div>
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn-add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            افزودن به سبد
+                        </button>
+                        <button class="btn-quick-view" onclick="openQuickView(4)">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- محصول 5 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="/placeholder.svg?height=300&width=300" alt="کیسه بوکس">
+                </div>
+                <div class="product-info">
+                    <div class="product-category">تجهیزات تمرینی</div>
+                    <h3 class="product-title">کیسه بوکس 120 سانتی‌متری چرم مصنوعی</h3>
+                    <div class="product-price">
+                        <div class="current-price">1,200,000 تومان</div>
+                    </div>
+                    <div class="product-rating">
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="rating-count">(8)</div>
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn-add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            افزودن به سبد
+                        </button>
+                        <button class="btn-quick-view" onclick="openQuickView(5)">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- محصول 6 -->
+            <div class="product-card">
+                <div class="product-badge">تخفیف ویژه</div>
+                <div class="product-image">
+                    <img src="/placeholder.svg?height=300&width=300" alt="کمربند کاراته">
+                </div>
+                <div class="product-info">
+                    <div class="product-category">اکسسوری</div>
+                    <h3 class="product-title">کمربند کاراته مشکی نخی درجه یک</h3>
+                    <div class="product-price">
+                        <div class="current-price">120,000 تومان</div>
+                        <div class="old-price">180,000 تومان</div>
+                    </div>
+                    <div class="product-rating">
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <div class="rating-count">(15)</div>
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn-add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            افزودن به سبد
+                        </button>
+                        <button class="btn-quick-view" onclick="openQuickView(6)">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- محصول 7 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="/placeholder.svg?height=300&width=300" alt="هوگو الکترونیکی">
+                </div>
+                <div class="product-info">
+                    <div class="product-category">تجهیزات تمرینی</div>
+                    <h3 class="product-title">هوگو الکترونیکی تکواندو استاندارد مسابقات</h3>
+                    <div class="product-price">
+                        <div class="current-price">2,500,000 تومان</div>
+                    </div>
+                    <div class="product-rating">
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <div class="rating-count">(7)</div>
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn-add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            افزودن به سبد
+                        </button>
+                        <button class="btn-quick-view" onclick="openQuickView(7)">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- محصول 8 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="/placeholder.svg?height=300&width=300" alt="میت بوکس">
+                </div>
+                <div class="product-info">
+                    <div class="product-category">تجهیزات تمرینی</div>
+                    <h3 class="product-title">میت بوکس دست چرم طبیعی</h3>
+                    <div class="product-price">
+                        <div class="current-price">350,000 تومان</div>
+                    </div>
+                    <div class="product-rating">
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <div class="rating-count">(22)</div>
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn-add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            افزودن به سبد
+                        </button>
+                        <button class="btn-quick-view" onclick="openQuickView(8)">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- صفحه‌بندی -->
+        <div class="pagination">
+            <div class="pagination-item active">1</div>
+            <div class="pagination-item">2</div>
+            <div class="pagination-item">3</div>
+            <div class="pagination-item"><i class="fas fa-ellipsis-h"></i></div>
+            <div class="pagination-item">10</div>
+            <div class="pagination-item"><i class="fas fa-chevron-left"></i></div>
+        </div>
+
+        <!-- ویژگی‌های فروشگاه -->
+        <div class="shop-features">
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fas fa-truck"></i>
+                </div>
+                <div class="feature-text">
+                    <h3>ارسال سریع</h3>
+                    <p>ارسال به سراسر کشور</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="feature-text">
+                    <h3>ضمانت اصالت کالا</h3>
+                    <p>تضمین کیفیت محصولات</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fas fa-sync-alt"></i>
+                </div>
+                <div class="feature-text">
+                    <h3>7 روز ضمانت بازگشت</h3>
+                    <p>بدون قید و شرط</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <div class="feature-text">
+                    <h3>پشتیبانی 24/7</h3>
+                    <p>پاسخگوی شما هستیم</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- مودال نمایش سریع محصول -->
+<div id="quickViewModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-close" onclick="closeQuickView()">
+            <i class="fas fa-times"></i>
+        </div>
+        <div class="product-detail">
+            <div class="product-detail-images">
+                <img src="/placeholder.svg?height=500&width=500" alt="تصویر محصول" id="modalProductImage">
+            </div>
+            <div class="product-detail-info">
+                <div class="product-detail-category" id="modalProductCategory">دسته‌بندی</div>
+                <h2 class="product-detail-title" id="modalProductTitle">عنوان محصول</h2>
+                <div class="product-detail-price">
+                    <div class="product-detail-current-price" id="modalProductPrice">قیمت</div>
+                    <div class="product-detail-old-price" id="modalProductOldPrice">قیمت قبلی</div>
+                </div>
+                <div class="product-detail-rating">
+                    <div class="product-detail-rating-stars" id="modalProductRating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="product-detail-rating-count" id="modalProductRatingCount">(24 نظر)</div>
+                </div>
+                <div class="product-detail-description" id="modalProductDescription">
+                    توضیحات محصول اینجا قرار می‌گیرد. این محصول با کیفیت عالی و مواد مرغوب تولید شده است و برای استفاده در تمرینات و مسابقات مناسب می‌باشد.
+                </div>
+                <div class="product-detail-meta">
+                    <div class="meta-item">
+                        <div class="meta-label">کد محصول:</div>
+                        <div id="modalProductCode">PRD-001</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">موجودی:</div>
+                        <div id="modalProductStock">موجود در انبار</div>
+                    </div>
+                </div>
+                <div class="product-detail-quantity">
+                    <div class="quantity-label">تعداد:</div>
+                    <div class="quantity-input">
+                        <div class="quantity-btn" onclick="decreaseQuantity()">-</div>
+                        <input type="text" value="1" id="productQuantity">
+                        <div class="quantity-btn" onclick="increaseQuantity()">+</div>
+                    </div>
+                </div>
+                <div class="product-detail-actions">
+                    <button class="btn-add-to-cart-detail" onclick="addToCartFromModal()">
+                        <i class="fas fa-shopping-cart"></i>
+                        افزودن به سبد خرید
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

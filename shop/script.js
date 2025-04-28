@@ -1,1 +1,0 @@
-var shopitemdesc = document.getElementsByClassName('shop-item-desc');

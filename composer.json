@@ -1,0 +1,19 @@
+{
+    "name": "javadrahmani2003/namazi-website",
+    "type": "project",
+    "license": "proprietary",
+    "autoload": {
+        "psr-4": {
+            "MrJay0xJ\\NamaziWebsite\\": "src/"
+        }
+    },
+    "require": {
+        "zarinpal/zarinpal-php-sdk": "^1.0",
+        "nyholm/psr7": "^1.8"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    }
+}
