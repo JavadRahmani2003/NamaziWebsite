@@ -1,7 +1,3 @@
-<?php
-require_once '../modules/config.php';
-require_once 'functions.php';
-?>
 <!DOCTYPE html>
 <html lang="fa">
 <head>
@@ -9,12 +5,12 @@ require_once 'functions.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>اخبار - باشگاه ورزشی آرین رزم</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../indexStyle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <script>
     function loadMenu() {
-        fetch('../menu.html')
+        fetch('../menuSubFolder.html')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok ' + response.statusText);
@@ -27,35 +23,29 @@ require_once 'functions.php';
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
         });
+        loadFooter();
+    }
+    function loadFooter() {
+        fetch('../footerSubFolder.html')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.text();
+        })
+        .then(data => {
+            document.getElementById('footersite').innerHTML = data;
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
     }
     window.onload = loadMenu;
 </script>
 <body dir="rtl" id="lighttheme">
 
 <!-- منوی اصلی -->
-<header class="header">
-    <div class="container">
-        <div class="logo">
-            <a href="index.html">
-                <img src="/placeholder.svg?height=60&width=150" alt="لوگوی باشگاه آرین رزم">
-            </a>
-        </div>
-        <nav id="mysitemenu"></nav>
-        <div class="header-actions">
-            <!-- <?php // if (is_logged_in()): ?>
-                <a href="dashboard.php" class="login-btn">پنل کاربری</a>
-            <?php //else: ?>
-                <a href="login.php" class="login-btn">ورود / ثبت نام</a>
-            <?php //endif; ?>
-            <div class="theme-toggle" onclick="toggleTheme()">
-                <i class="fas fa-moon"></i>
-            </div>
-            <div class="mobile-menu-toggle">
-                <i class="fas fa-bars"></i>
-            </div> -->
-        </div>
-    </div>
-</header>
+<nav id="mysiteMenu"></nav>
 
 <!-- محتوای اصلی اخبار -->
 <div class="news-container">
@@ -73,7 +63,7 @@ require_once 'functions.php';
             <!-- اخبار اصلی -->
             <div class="news-main">
                 <?php
-                include('modules/GetNews.php');
+                include('../modules/GetNews.php');
                 $mydb = new NewsRecieve();
                 $news = $mydb->returnQueryFromDb();
                 
@@ -90,7 +80,7 @@ require_once 'functions.php';
                             <div class="news-card-content">
                                 <div class="news-card-date">
                                     <i class="far fa-calendar-alt"></i>
-                                    <?php echo gregorian_to_jalali($date); ?>
+                                    <?php // echo gregorian_to_jalali($date); ?>
                                 </div>
                                 <h3 class="news-card-title"><?php echo $row['header']; ?></h3>
                                 <p class="news-card-excerpt"><?php echo $excerpt; ?></p>
@@ -123,7 +113,7 @@ require_once 'functions.php';
                                         <div class="sidebar-news-title"><?php echo $row['header']; ?></div>
                                         <div class="sidebar-news-date">
                                             <i class="far fa-calendar-alt"></i>
-                                            <?php echo gregorian_to_jalali($date); ?>
+                                            <?php // echo gregorian_to_jalali($date); ?>
                                         </div>
                                     </a>
                                 </li>
@@ -186,12 +176,6 @@ require_once 'functions.php';
                     <a class="page-link" href="#">1</a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link" href="#">2</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">3</a>
-                </li>
-                <li class="page-item">
                     <a class="page-link" href="#"><i class="fas fa-chevron-left"></i></a>
                 </li>
             </ul>
@@ -200,28 +184,8 @@ require_once 'functions.php';
 </div>
 
 <!-- فوتر -->
-<footer class="footer">
-    <div class="container">
-        <div class="footer-top">
-            <div class="footer-column">
-                <div class="footer-logo">
-                    <img src="/placeholder.svg?height=60&width=150" alt="لوگوی باشگاه آرین رزم">
-                </div>
-                <p class="footer-description">
-                    باشگاه ورزشی آرین رزم با بیش از 15 سال سابقه در زمینه آموزش هنرهای رزمی، با مربیان مجرب و امکانات مدرن آماده خدمت‌رسانی به علاقه‌مندان است.
-                </p>
-                <div class="social-icons">
-                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-telegram"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
-                </div>
-            </div>
-            <div class="footer-column">
-                <h3 class="footer-title">دسترسی سریع</h3>
-                <ul class="footer-links">
-                    <li><a href="index.html">صفحه اصلی</a></li>
-                    <li><a href="#">درباره ما</a></li>
-                    <li><a href="#">کلاس‌ها</a></li>
-                    <li><a href="#">مربیان</a></li>
-                    <li><a href="shop.php">
+<footer id="footersite"></footer>
+<script src="../indexScript.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
