@@ -82,8 +82,8 @@
                                     <i class="far fa-calendar-alt"></i>
                                     <?php // echo gregorian_to_jalali($date); ?>
                                 </div>
-                                <h3 class="news-card-title"><?php echo $row['header']; ?></h3>
-                                <p class="news-card-excerpt"><?php echo $excerpt; ?></p>
+                                <h3 class="news-card-title"><?php // echo $row['header']; ?></h3>
+                                <p class="news-card-excerpt"><?php // echo $excerpt; ?></p>
                                 <a href="news-detail.php?pagenumber=<?php echo $row['pagenumb']; ?>" class="news-card-link">ادامه مطلب</a>
                             </div>
                         </div>

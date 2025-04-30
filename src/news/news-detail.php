@@ -497,14 +497,11 @@ body {
             include("..\\modules\\GetNews.php");
             $result = new NewsRecieve;
             $pagenumber = $result->getNewsById($_GET['pagenumber']);
-            foreach ($pagenumber as $pagenumbers) {
-                echo $pagenumbers['header'];
-            }
+            echo $pagenumber['header'];
             ?>
         </div>
         <div class="links">
             <?php
-            foreach ($pagenumber as $pagenumbers) {
                 echo '<div class="news-content">';
                 
                 // تاریخ و نویسنده
@@ -514,21 +511,21 @@ body {
                 echo '<span><i class="far fa-folder"></i> اخبار باشگاه</span>';
                 echo '</div>';
                 
-                // تصویر خبر (اگر وجود داشته باشد)
-                if (!empty($pagenumbers['image'])) {
-                    echo '<div class="news-image">';
-                    echo '<img src="' . $pagenumbers['image'] . '" alt="' . $pagenumbers['header'] . '">';
-                    echo '</div>';
-                }
+                // // تصویر خبر (اگر وجود داشته باشد)
+                // if (!empty($pagenumbers['image'])) {
+                //     echo '<div class="news-image">';
+                //     echo '<img src="' . $pagenumbers['image'] . '" alt="' . $pagenumbers['header'] . '">';
+                //     echo '</div>';
+                // }
                 
                 // محتوای خبر
-                echo $pagenumbers['thebody'];
+                echo $pagenumber['thebody'];
                 
                 // برچسب‌ها
                 echo '<div class="news-tags">';
                 echo '<span>برچسب‌ها: </span>';
-                echo '<a href="#" class="news-tag">باشگاه</a>';
                 echo '<a href="#" class="news-tag">آرین رزم</a>';
+                echo '<a href="#" class="news-tag">باشگاه</a>';
                 echo '<a href="#" class="news-tag">ورزش</a>';
                 echo '</div>';
                 
@@ -547,7 +544,6 @@ body {
                 echo '<a href="index.php" class="back-button"><i class="fas fa-arrow-right ml-2"></i> بازگشت به اخبار</a>';
                 
                 echo '</div>';
-            }
             ?>
         </div>
     </section>

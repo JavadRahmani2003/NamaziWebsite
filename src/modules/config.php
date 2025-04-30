@@ -20,7 +20,7 @@ class Database {
             die("Connection failed ".$this->connection->connect_error);
         }
     }
-
+    
     public function dbComunicate($sql) {
         $result = $this->connection->query($sql);
         if ($this->connection->error) {

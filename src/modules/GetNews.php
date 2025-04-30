@@ -6,7 +6,6 @@ include("config.php");
  */
 class NewsRecieve {
     private $conn;
-    
     /**
      * سازنده کلاس
      */
@@ -19,23 +18,23 @@ class NewsRecieve {
      * دریافت تمام اخبار
      */
     public function returnQueryFromDb() {
-        $query = "SELECT * FROM news ORDER BY date DESC";
-        $result = $this->conn->query($query);
-        
-        return $result;
+        $result = new Database('localhost','root','','newsdatabase');
+        $result->connect();
+        $sql = "SELECT * FROM news";
+        $rresult = $result->dbComunicate($sql);
+        return $rresult;
     }
     
     /**
      * دریافت خبر با شناسه مشخص
      */
     public function getNewsById($id) {
-        $stmt = $this->conn->prepare("SELECT * FROM news WHERE pagenumb = ?");
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        
-        if ($result->num_rows > 0) {
-            return $result->fetch_assoc();
+        $result = new Database('localhost','root','','newsdatabase');
+        $result->connect();
+        $sql = "SELECT * FROM news WHERE pagenumb=".$id;
+        $rresult = $result->dbComunicate($sql);
+        if ($rresult->num_rows > 0) {
+            return $rresult->fetch_assoc();
         }
         
         return null;
