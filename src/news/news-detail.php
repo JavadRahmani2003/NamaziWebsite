@@ -497,14 +497,11 @@ body {
             include("..\\modules\\GetNews.php");
             $result = new NewsRecieve;
             $pagenumber = $result->getNewsById($_GET['pagenumber']);
-            foreach ($pagenumber as $pagenumbers) {
-                echo $pagenumbers['header'];
-            }
+            echo $pagenumber['header'];
             ?>
         </div>
         <div class="links">
             <?php
-            foreach ($pagenumber as $pagenumbers) {
                 echo '<div class="news-content">';
                 
                 // تاریخ و نویسنده
@@ -515,14 +512,14 @@ body {
                 echo '</div>';
                 
                 // تصویر خبر (اگر وجود داشته باشد)
-                if (!empty($pagenumbers['image'])) {
+                if (!empty($pagenumber['image'])) {
                     echo '<div class="news-image">';
-                    echo '<img src="' . $pagenumbers['image'] . '" alt="' . $pagenumbers['header'] . '">';
+                    echo '<img src="' . $pagenumber['image'] . '" alt="' . $pagenumber['header'] . '">';
                     echo '</div>';
                 }
                 
                 // محتوای خبر
-                echo $pagenumbers['thebody'];
+                echo $pagenumber['thebody'];
                 
                 // برچسب‌ها
                 echo '<div class="news-tags">';
@@ -536,10 +533,10 @@ body {
                 echo '<div class="news-share">';
                 echo '<span class="news-share-title">اشتراک‌گذاری:</span>';
                 echo '<div class="news-share-links">';
-                echo '<a href="#" class="news-share-link" data-type="facebook"><i class="fab fa-facebook-f"></i></a>';
-                echo '<a href="#" class="news-share-link" data-type="twitter"><i class="fab fa-twitter"></i></a>';
-                echo '<a href="#" class="news-share-link" data-type="telegram"><i class="fab fa-telegram-plane"></i></a>';
-                echo '<a href="#" class="news-share-link" data-type="whatsapp"><i class="fab fa-whatsapp"></i></a>';
+                echo '<a href="'.$_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'].'" class="news-share-link" data-type="facebook"><i class="fab fa-facebook-f"></i></a>';
+                echo '<a href="'.$_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'].'" class="news-share-link" data-type="twitter"><i class="fab fa-twitter"></i></a>';
+                echo '<a href="'.$_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'].'" class="news-share-link" data-type="telegram"><i class="fab fa-telegram-plane"></i></a>';
+                echo '<a href="'.$_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'].'" class="news-share-link" data-type="whatsapp"><i class="fab fa-whatsapp"></i></a>';
                 echo '</div>';
                 echo '</div>';
                 
@@ -547,7 +544,6 @@ body {
                 echo '<a href="index.php" class="back-button"><i class="fas fa-arrow-right ml-2"></i> بازگشت به اخبار</a>';
                 
                 echo '</div>';
-            }
             ?>
         </div>
     </section>
@@ -558,7 +554,7 @@ body {
             $mypagenumber = $result->returnQueryFromDb();
             while ($row = $mypagenumber->fetch_assoc()) {
                 if ($row['pagenumb'] != $_GET['pagenumber']) {
-                    echo "<a href='ThePage.php?pagenumber=" . $row['pagenumb'] . "'>" . $row['header'] . "</a>";
+                    echo "<a href='news-detail.php?pagenumber=" . $row['pagenumb'] . "'>" . $row['header'] . "</a>";
                 }
             }
             ?>
@@ -622,31 +618,9 @@ function setupSocialSharing() {
     shareButtons.forEach(button => {
         button.addEventListener('click', (e) => {
             e.preventDefault();
-            
-            const type = button.getAttribute('data-type');
-            const url = encodeURIComponent(window.location.href);
-            const title = encodeURIComponent(document.title);
-            
-            let shareUrl = '';
-            
-            switch(type) {
-                case 'facebook':
-                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
-                    break;
-                case 'twitter':
-                    shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
-                    break;
-                case 'telegram':
-                    shareUrl = `https://t.me/share/url?url=${url}&text=${title}`;
-                    break;
-                case 'whatsapp':
-                    shareUrl = `https://api.whatsapp.com/send?text=${title} ${url}`;
-                    break;
-            }
-            
-            if (shareUrl) {
-                window.open(shareUrl, '_blank', 'width=600,height=400');
-            }
+            //e.clipboard.writeText();
+            e.alert(e.clipboard.writeText("dsfdsf"));
+            //e.alert("لینک خبر کپی شد");
         });
     });
 }
