@@ -524,8 +524,8 @@ body {
                 // برچسب‌ها
                 echo '<div class="news-tags">';
                 echo '<span>برچسب‌ها: </span>';
-                echo '<a href="#" class="news-tag">باشگاه</a>';
                 echo '<a href="#" class="news-tag">آرین رزم</a>';
+                echo '<a href="#" class="news-tag">باشگاه</a>';
                 echo '<a href="#" class="news-tag">ورزش</a>';
                 echo '</div>';
                 

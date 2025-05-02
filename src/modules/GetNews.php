@@ -6,7 +6,6 @@ include("config.php");
  */
 class NewsRecieve {
     private $conn;
-    
     /**
      * سازنده کلاس
      */
