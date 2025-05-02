@@ -1,0 +1,817 @@
+/* استایل‌های اصلی سیستم اخبار */
+:root {
+    --primary-color: #e63946;
+    --secondary-color: #1d3557;
+    --light-color: #f1faee;
+    --dark-color: #1d3557;
+    --gray-color: #a8dadc;
+    --border-color: #ddd;
+    --shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* کانتینر اصلی اخبار */
+.news-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Vazir', 'Tahoma', sans-serif;
+}
+
+/* هدر اخبار */
+.news-header {
+    margin-bottom: 30px;
+    text-align: center;
+    padding: 20px 0;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.news-title {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.news-subtitle {
+    font-size: 1.2rem;
+    color: var(--secondary-color);
+}
+
+/* گرید اصلی */
+.news-grid {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 30px;
+}
+
+@media (max-width: 768px) {
+    .news-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* بخش اصلی اخبار */
+.news-main {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+/* کارت خبر */
+.news-card {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.news-card-image {
+    height: 200px;
+    overflow: hidden;
+}
+
+.news-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.news-card:hover .news-card-image img {
+    transform: scale(1.05);
+}
+
+.news-card-content {
+    padding: 15px;
+}
+
+.news-card-date {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.news-card-title {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: var(--secondary-color);
+    line-height: 1.4;
+}
+
+.news-card-excerpt {
+    font-size: 0.95rem;
+    color: #555;
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.news-card-link {
+    display: inline-block;
+    color: var(--primary-color);
+    font-weight: bold;
+    text-decoration: none;
+    position: relative;
+    padding-left: 5px;
+}
+
+.news-card-link:after {
+    content: '←';
+    margin-right: 5px;
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+.news-card-link:hover:after {
+    transform: translateX(-5px);
+}
+
+/* صفحه‌بندی */
+.news-pagination {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.page-item {
+    margin: 0 5px;
+}
+
+.page-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #fff;
+    color: var(--secondary-color);
+    text-decoration: none;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.page-item.active .page-link {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.page-item.disabled .page-link {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.page-link:hover:not(.disabled) {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+/* سایدبار */
+.news-sidebar {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    padding: 20px;
+}
+
+.sidebar-section {
+    margin-bottom: 30px;
+}
+
+.sidebar-section:last-child {
+    margin-bottom: 0;
+}
+
+.sidebar-header {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.sidebar-news-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-news-item {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.sidebar-news-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.sidebar-news-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.sidebar-news-title {
+    font-size: 1rem;
+    color: var(--secondary-color);
+    margin-bottom: 5px;
+    line-height: 1.4;
+    transition: color 0.3s ease;
+}
+
+.sidebar-news-link:hover .sidebar-news-title {
+    color: var(--primary-color);
+}
+
+.sidebar-news-date, .sidebar-news-meta {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* دسته‌بندی‌ها */
+.category-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.category-item {
+    margin-bottom: 10px;
+}
+
+.category-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    text-decoration: none;
+    color: var(--secondary-color);
+    transition: all 0.3s ease;
+}
+
+.category-link:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.category-count {
+    background-color: var(--primary-color);
+    color: #fff;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+}
+
+.category-link:hover .category-count {
+    background-color: #fff;
+    color: var(--primary-color);
+}
+
+/* برچسب‌ها */
+.tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.tag-cloud-item {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    text-decoration: none;
+    color: var(--secondary-color);
+    transition: all 0.3s ease;
+}
+
+.tag-cloud-item:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+/* فرم جستجو */
+.search-form {
+    margin-top: 10px;
+}
+
+.search-input-group {
+    display: flex;
+    position: relative;
+}
+
+.search-input {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 0.95rem;
+}
+
+.search-button {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.search-button:hover {
+    color: var(--primary-color);
+}
+
+/* صفحه جزئیات خبر */
+.news-detail-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.news-detail-grid {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 30px;
+}
+
+@media (max-width: 768px) {
+    .news-detail-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.news-detail-main {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+.news-detail-image {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+}
+
+.news-detail-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.news-detail-header {
+    padding: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.news-detail-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.news-detail-meta-item {
+    display: flex;
+    align-items: center;
+}
+
+.news-detail-meta-item i {
+    margin-left: 5px;
+    color: var(--primary-color);
+}
+
+.news-detail-title {
+    font-size: 2rem;
+    color: var(--secondary-color);
+    line-height: 1.3;
+}
+
+.news-detail-body {
+    padding: 20px;
+}
+
+.news-detail-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #333;
+}
+
+.news-detail-text p {
+    margin-bottom: 20px;
+}
+
+.news-detail-text img {
+    max-width: 100%;
+    height: auto;
+    margin: 20px 0;
+    border-radius: 8px;
+}
+
+.news-detail-footer {
+    padding: 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+/* برچسب‌ها */
+.news-detail-tags {
+    margin-bottom: 20px;
+}
+
+.news-tag {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    text-decoration: none;
+    color: var(--secondary-color);
+    margin-left: 5px;
+    margin-bottom: 5px;
+    transition: all 0.3s ease;
+}
+
+.news-tag:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+/* اشتراک‌گذاری */
+.news-detail-share {
+    display: flex;
+    align-items: center;
+}
+
+.share-text {
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.share-links {
+    display: flex;
+    gap: 10px;
+}
+
+.share-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    color: #fff;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.share-link:hover {
+    transform: translateY(-3px);
+}
+
+.share-facebook {
+    background-color: #3b5998;
+}
+
+.share-twitter {
+    background-color: #1da1f2;
+}
+
+.share-telegram {
+    background-color: #0088cc;
+}
+
+.share-whatsapp {
+    background-color: #25d366;
+}
+
+/* ناوبری بین اخبار */
+.news-detail-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #fff;
+    border-radius: 4px;
+    text-decoration: none;
+    color: var(--secondary-color);
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+    max-width: 45%;
+}
+
+.nav-link:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.nav-link.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.nav-link i {
+    margin: 0 5px;
+}
+
+.nav-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* گالری تصاویر */
+.news-gallery {
+    margin-top: 30px;
+}
+
+.gallery-title {
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 15px;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.gallery-item {
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    height: 150px;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+/* لایت باکس */
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.lightbox img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: #fff;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+/* فرم اخبار */
+.news-form-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.form-title {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.news-form {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    padding: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: var(--secondary-color);
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.form-select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #c1121f;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* پیام‌ها */
+.message {
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.message i {
+    margin-left: 10px;
+    font-size: 1.2rem;
+}
+
+.message-info {
+    background-color: #cce5ff;
+    color: #004085;
+}
+
+.message-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.message-warning {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.message-error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* دکمه اسکرول به بالا */
+.scroll-top {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--primary-color);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 99;
+}
+
+.scroll-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.scroll-top:hover {
+    background-color: #c1121f;
+    transform: translateY(-3px);
+}
+
+/* پیام خالی */
+.empty-message {
+    padding: 30px;
+    text-align: center;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    color: #6c757d;
+    font-size: 1.1rem;
+}
+
+/* ریسپانسیو */
+@media (max-width: 992px) {
+    .news-detail-title {
+        font-size: 1.8rem;
+    }
+    
+    .news-detail-text {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .news-main {
+        grid-template-columns: 1fr;
+    }
+    
+    .news-detail-meta {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .news-detail-image {
+        height: 300px;
+    }
+    
+    .news-detail-title {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .news-detail-image {
+        height: 200px;
+    }
+    
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .form-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .btn {
+        width: 100%;
+    }
+}

@@ -1,6 +1,6 @@
 <?php
-include("config.php");
-
+require 'config.php';
+require 'database.php';
 /**
  * کلاس دریافت اخبار از پایگاه داده
  */
@@ -9,32 +9,30 @@ class NewsRecieve {
     /**
      * سازنده کلاس
      */
-    public function __construct() {
-        global $conn;
-        $this->conn = $conn;
+    function __construct()
+    {
+        $this->conn = new Database;
     }
     
     /**
      * دریافت تمام اخبار
      */
     public function returnQueryFromDb() {
-        $result = new Database('localhost','root','','newsdatabase');
-        $result->connect();
+        $this->conn->getConnection();
         $sql = "SELECT * FROM news";
-        $rresult = $result->dbComunicate($sql);
-        return $rresult;
+        $result = $this->conn->query($sql);
+        return $result;
     }
     
     /**
      * دریافت خبر با شناسه مشخص
      */
     public function getNewsById($id) {
-        $result = new Database('localhost','root','','newsdatabase');
-        $result->connect();
+        $this->conn->getConnection();
         $sql = "SELECT * FROM news WHERE pagenumb=".$id;
-        $rresult = $result->dbComunicate($sql);
-        if ($rresult->num_rows > 0) {
-            return $rresult->fetch_assoc();
+        $result = $this->conn->query($sql);
+        if ($result->num_rows > 0) {
+            return $result->fetch_assoc();
         }
         return null;
     }
@@ -46,7 +44,6 @@ class NewsRecieve {
         $stmt = $this->conn->prepare("SELECT * FROM news WHERE category = ? ORDER BY date DESC");
         $stmt->bind_param("s", $category);
         $stmt->execute();
-        
         return $stmt->get_result();
     }
     

@@ -24,3 +24,4 @@ if (empty($cart['items'])) {
 
 // محاسبه هزینه ارسال
 $shipping_cost = 0
+?>
