@@ -69,7 +69,7 @@
                 
                 if ($news && $news->num_rows > 0) {
                     while ($row = $news->fetch_assoc()) {
-                        $image_path = !empty($row['image_path']) ? $row['image_path'] : "/placeholder.svg?height=200&width=300";
+                        $image_path = !empty($row['image_path']) ? $row['image_path'] : "";
                         $date = !empty($row['date']) ? $row['date'] : date('Y-m-d');
                         $excerpt = !empty($row['excerpt']) ? $row['excerpt'] : "خلاصه خبر در اینجا نمایش داده می‌شود...";
                         ?>
