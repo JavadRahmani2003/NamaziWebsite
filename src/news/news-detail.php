@@ -512,9 +512,9 @@ body {
                 echo '</div>';
                 
                 // تصویر خبر (اگر وجود داشته باشد)
-                if (!empty($pagenumber['image'])) {
+                if (!empty($pagenumber['imageAddress'])) {
                     echo '<div class="news-image">';
-                    echo '<img src="' . $pagenumber['image'] . '" alt="' . $pagenumber['header'] . '">';
+                    echo '<img src="' . $pagenumber['imageAddress'] . '" alt="' . $pagenumber['header'] . '">';
                     echo '</div>';
                 }
                 

@@ -1,7 +1,7 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "post";
-    $targetDir = __DIR__ . "../uploads/newsimages/";
+    $targetDir = __DIR__ . "uploads/newsimages/";
     $targetFile = $targetDir . basename($_FILES["fileimage"]["name"]);
     $uploadOk = 1;
     $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
@@ -13,6 +13,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } 
     else
     {
+        echo $_FILES["fileimage"]["tmp_name"];
+        echo $targetFile;
+        echo $targetDir;
         if (move_uploaded_file($_FILES["fileimage"]["tmp_name"] , $targetFile)) {
             echo "The file " . htmlspecialchars(basename($_FILES["fileimage"]["name"])) . " has been uploaded.";
             
