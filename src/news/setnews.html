@@ -7,9 +7,12 @@
 </head>
 <body>
     <form action="setnews.php" method="post" enctype="multipart/form-data">
-        <input type="text" name="newssum" id="newssum">
-        <input type="text" name="newstxt" id="newstxt">
-        <input type="file" name="fileimage" id="fileimage">
+        <label for="newssum">خلاصه خبر</label>
+        <input type="text" name="newssum" id="newssum"><br>
+        <label for="newstxt">متن خبر</label>
+        <textarea name="newstxt" id="newstxt"></textarea><br>
+        <label for="fileimage">عکس از خبر</label>
+        <input type="file" name="fileimage" id="fileimage"><br>
         <input type="submit" value="submit">
     </form>
 </body>

@@ -69,8 +69,8 @@
                 
                 if ($news && $news->num_rows > 0) {
                     while ($row = $news->fetch_assoc()) {
-                        $image_path = !empty($row['image_path']) ? $row['image_path'] : "";
-                        $date = !empty($row['date']) ? $row['date'] : date('Y-m-d');
+                        $image_path = !empty($row['imageAddress']) ? $row['imageAddress'] : "";
+                        $date = !empty($row['datetime']) ? $row['datetime'] : date('Y-m-d');
                         $excerpt = !empty($row['excerpt']) ? $row['excerpt'] : "خلاصه خبر در اینجا نمایش داده می‌شود...";
                         ?>
                         <div class="news-card">
@@ -80,9 +80,9 @@
                             <div class="news-card-content">
                                 <div class="news-card-date">
                                     <i class="far fa-calendar-alt"></i>
-                                    <?php // echo gregorian_to_jalali($date); ?>
+                                    <?php echo $date ?>
                                 </div>
-                                <h3 class="news-card-title"><?php // echo $row['header']; ?></h3>
+                                <h3 class="news-card-title"><?php echo $row['header']; ?></h3>
                                 <p class="news-card-excerpt"><?php // echo $excerpt; ?></p>
                                 <a href="news-detail.php?pagenumber=<?php echo $row['pagenumb']; ?>" class="news-card-link">ادامه مطلب</a>
                             </div>

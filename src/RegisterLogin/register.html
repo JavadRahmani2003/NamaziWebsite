@@ -5,25 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ثبت نام - باشگاه ورزشی آرین رزم</title>
     <link rel="stylesheet" href="registerstyle.css">
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../indexStyle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script>
         function loadMenu() {
-        fetch('../menu.html')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
-                }
-                return response.text();
-            })
-            .then(data => {
-                document.getElementById('mysiteMenu').innerHTML = data;
-            })
-            .catch(error => {
-                console.error('There was a problem with the fetch operation:', error);
-            });
-        }
-        window.onload = loadMenu;
+        fetch('../menuSubFolder.html')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.text();
+        })
+        .then(data => {
+            document.getElementById('mysiteMenu').innerHTML = data;
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+        loadFooter();
+    }
+    function loadFooter() {
+        fetch('../footerSubFolder.html')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.text();
+        })
+        .then(data => {
+            document.getElementById('footersite').innerHTML = data;
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+    }
+    window.onload = loadMenu;
     </script>
 </head>
 <body dir="rtl" id="lighttheme">
@@ -97,6 +113,7 @@
                         <label for="education">تحصیلات</label>
                         <select id="education" name="education">
                             <option value="">انتخاب کنید</option>
+                            <option value="primary">ابتدایی</option>
                             <option value="diploma">دیپلم</option>
                             <option value="associate">فوق دیپلم</option>
                             <option value="bachelor">کارشناسی</option>
@@ -371,44 +388,7 @@
     </div>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <h2>باشگاه ورزشی آرین رزم</h2>
-                    <p>با 27 سال سابقه درخشان در آموزش هنرهای رزمی</p>
-                </div>
-                <div class="footer-links">
-                    <h3>دسترسی سریع</h3>
-                    <ul>
-                        <li><a href="index.html">صفحه اصلی</a></li>
-                        <li><a href="index.html#services">خدمات</a></li>
-                        <li><a href="index.html#gallery">گالری</a></li>
-                        <li><a href="shop/">فروشگاه</a></li>
-                        <li><a href="news/">اخبار</a></li>
-                        <li><a href="index.html#contact">ارتباط با ما</a></li>
-                    </ul>
-                </div>
-                <div class="footer-contact">
-                    <h3>اطلاعات تماس</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> تهران، خیابان ولیعصر، کوچه بهار، پلاک 42</p>
-                    <p><i class="fas fa-phone"></i> 021-12345678</p>
-                    <p><i class="fas fa-envelope"></i> info@aryanrazm.com</p>
-                </div>
-                <div class="footer-newsletter">
-                    <h3>عضویت در خبرنامه</h3>
-                    <p>برای اطلاع از آخرین اخبار و رویدادها در خبرنامه ما عضو شوید</p>
-                    <form class="newsletter-form">
-                        <input type="email" placeholder="ایمیل خود را وارد کنید">
-                        <button type="submit">عضویت</button>
-                    </form>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>© 1403 باشگاه ورزشی آرین رزم. تمامی حقوق محفوظ است.</p>
-            </div>
-        </div>
-    </footer>
+    <footer id="footersite"></footer>
 
     <!-- Back to Top Button -->
     <a href="#" class="back-to-top" id="backToTop">
