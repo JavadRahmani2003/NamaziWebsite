@@ -99,7 +99,7 @@
     </div>
 </div>
 
-<script src="script.js"></script>
+<script src="../indexScript.js"></script>
 <script>
     // Form validation
     document.addEventListener('DOMContentLoaded', function() {

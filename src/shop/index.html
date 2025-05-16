@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>فروشگاه - باشگاه ورزشی آرین رزم</title>
 <link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="../indexStyle.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <script>
     function loadMenu() {
-    fetch('../menu.html')
+        fetch('../menuSubFolder.html')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok ' + response.statusText);
@@ -22,6 +22,22 @@
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
         });
+        loadFooter();
+    }
+    function loadFooter() {
+        fetch('../footerSubFolder.html')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.text();
+        })
+        .then(data => {
+            document.getElementById('footersite').innerHTML = data;
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
     }
     window.onload = loadMenu;
 </script>
@@ -30,33 +46,10 @@
 
     <!-- منوی اصلی -->
 <nav id="mysiteMenu"></nav>
-<!-- <header class="header">
-    <div class="container">
-        <div class="logo">
-            <a href="index.html">
-                <img src="/placeholder.svg?height=60&width=150" alt="لوگوی باشگاه آرین رزم">
-            </a>
-        </div>
-            <ul>
-                <li><a href="index.html">صفحه اصلی</a></li>
-                <li><a href="#">درباره ما</a></li>
-                <li><a href="#">کلاس‌ها</a></li>
-                <li><a href="#">مربیان</a></li>
-                <li><a href="shop.html" class="active">فروشگاه</a></li>
-                <li><a href="#">اخبار</a></li>
-                <li><a href="#">تماس با ما</a></li>
-            </ul>
-        <div class="header-actions">
-            <a href="login.html" class="login-btn">ورود / ثبت نام</a>
-            <div class="theme-toggle" onclick="toggleTheme()">
-                <i class="fas fa-moon"></i>
-            </div>
-            <div class="mobile-menu-toggle">
-                <i class="fas fa-bars"></i>
-            </div>
-        </div>
-    </div>
-</header> -->
+
+<div class="MobileMenu" onclick="toggleMenu()">
+    <span>منو</span>
+</div>
 
 <!-- سبد خرید کوچک -->
 <div class="mini-cart" onclick="window.location.href='cart.php'">
@@ -377,10 +370,7 @@
         <!-- صفحه‌بندی -->
         <div class="pagination">
             <div class="pagination-item active">1</div>
-            <div class="pagination-item">2</div>
-            <div class="pagination-item">3</div>
-            <div class="pagination-item"><i class="fas fa-ellipsis-h"></i></div>
-            <div class="pagination-item">10</div>
+            <!-- <div class="pagination-item"><i class="fas fa-ellipsis-h"></i></div> -->
             <div class="pagination-item"><i class="fas fa-chevron-left"></i></div>
         </div>
 
@@ -484,6 +474,8 @@
         </div>
     </div>
 </div>
+
+<footer id="footersite"></footer>
 
 <script src="script.js"></script>
 </body>

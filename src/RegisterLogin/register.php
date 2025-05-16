@@ -396,7 +396,7 @@
     </a>
 </div>
 
-<script src="script.js"></script>
+<script src="../indexScript.js"></script>
 <script>
     // Form validation and submission
     document.addEventListener('DOMContentLoaded', function() {

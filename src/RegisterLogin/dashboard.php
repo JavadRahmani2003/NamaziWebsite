@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>پرتال کاربری - باشگاه ورزشی آرین رزم</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../indexStyle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         /* استایل‌های اختصاصی پرتال کاربری */
@@ -651,6 +652,9 @@
         }
     </style>
 </head>
+<?php
+    
+?>
 <body dir="rtl" id="lighttheme">
 
 <!-- Mobile Sidebar Toggle -->
@@ -669,7 +673,7 @@
         
         <div class="user-profile">
             <div class="user-avatar">
-                <img src="/placeholder.svg?height=200&width=200" alt="تصویر کاربر">
+                <img src="" alt="تصویر کاربر">
             </div>
             <div class="user-name">علی محمدی</div>
             <div class="user-role">هنرجوی کاراته</div>
@@ -940,7 +944,7 @@
             
             <div class="message-item">
                 <div class="message-avatar">
-                    <img src="/placeholder.svg?height=100&width=100" alt="تصویر فرستنده">
+                    <img src="" alt="تصویر فرستنده">
                 </div>
                 <div class="message-content">
                     <div class="message-header">
