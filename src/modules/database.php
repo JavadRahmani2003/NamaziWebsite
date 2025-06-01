@@ -23,7 +23,7 @@ class Database {
 
     private function connect() {
         try {
-            $this->connection = new \mysqli(
+            $this->connection = new mysqli(
                 $this->host,
                 $this->username,
                 $this->password,
@@ -98,8 +98,4 @@ class Database {
         $this->close();
     }
 }
-if (session_unset()) {
-    session_start();
-}
-date_default_timezone_set('Asia/Tehran');
 ?>

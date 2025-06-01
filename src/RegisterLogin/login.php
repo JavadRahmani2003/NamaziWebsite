@@ -64,7 +64,7 @@
                         <input type="text" id="username" name="username" required>
                         <i class="fas fa-user"></i>
                     </div>
-                    <div class="error-message">لطفاً نام کاربری یا ایمیل خود را وارد کنید</div>
+                    <div class="error-message">لطفاً ایمیل خود را وارد کنید</div>
                 </div>
                 
                 <div class="form-group">
@@ -75,21 +75,13 @@
                     </div>
                     <div class="error-message">لطفاً رمز عبور خود را وارد کنید</div>
                 </div>
-                
-                <div class="remember-forgot">
-                    <div class="remember-me">
-                        <input type="checkbox" id="rememberMe" name="rememberMe">
-                        <label for="rememberMe">مرا به خاطر بسپار</label>
-                    </div>
-                    <a href="#" class="forgot-password">رمز عبور را فراموش کرده‌اید؟</a>
-                </div>
-                
+                                
                 <button type="submit" class="login-btn">ورود به حساب کاربری</button>
             </form>
         </div>
         
         <div class="login-footer">
-            <p>حساب کاربری ندارید؟ <a href="register.html" class="register-link">ثبت نام کنید</a></p>
+            <p>حساب کاربری ندارید؟ <a href="register.php" class="register-link">ثبت نام کنید</a></p>
             <div class="social-login">
                 <a href="#" class="social-btn google"><i class="fab fa-google"></i></a>
                 <a href="#" class="social-btn telegram"><i class="fab fa-telegram-plane"></i></a>
