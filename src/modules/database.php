@@ -18,9 +18,8 @@ class Database {
         $this->database = $config['db_name'];
         $this->charset = $config['db_charset'] ?? 'utf8mb4';
 
-        $this->connect();
     }
-
+    
     private function connect() {
         try {
             $this->connection = new mysqli(
@@ -41,8 +40,9 @@ class Database {
             die($e->getMessage());
         }
     }
-
+    
     public function getConnection() {
+        $this->connect();
         return $this->connection;
     }
 

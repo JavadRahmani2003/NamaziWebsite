@@ -19,8 +19,6 @@ class Database {
         $this->password = $config['db_password'];
         $this->database = $config['db_name'];
         $this->charset = $config['db_charset'] ?? 'utf8mb4';
-        
-        $this->connect();
     }
 
     // الگوی Singleton برای اطمینان از وجود تنها یک نمونه از اتصال به پایگاه داده
@@ -53,6 +51,7 @@ class Database {
     }
 
     public function getConnection() {
+        $this->connect();
         return $this->connection;
     }
 

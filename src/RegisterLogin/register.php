@@ -70,7 +70,7 @@
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // بررسی وجود فیلدهای اجباری
             if (isset($_POST['firstName']) && isset($_POST['lastName']) && isset($_POST['nationalCode']) && 
-                isset($_POST['birthDate']) && isset($_POST['gender']) && isset($_POST['mobile']) && 
+                isset($_POST['birthDate']) && isset($_POST['gender']) && isset($_POST['mobile']) && isset($_POST['password']) &&
                 isset($_POST['address']) && isset($_POST['classes']) && isset($_POST['skillLevel']) && 
                 isset($_POST['hasHealthIssue']) && isset($_POST['hasInjury']) && 
                 isset($_POST['termsAgreement']) && isset($_POST['healthAgreement'])) {
@@ -85,6 +85,8 @@
                 $mobile = $_POST['mobile'];
                 $phone = isset($_POST['phone']) ? $_POST['phone'] : '';
                 $email = isset($_POST['email']) ? $_POST['email'] : '';
+                $password = isset($_POST['password']) ? $_POST['password'] : '';
+                $hashed_password = password_hash($password,PASSWORD_DEFAULT);
                 $emergencyContact = isset($_POST['emergencyContact']) ? $_POST['emergencyContact'] : '';
                 $address = $_POST['address'];
                 $classes = $_POST['classes']; // این یک آرایه است
@@ -116,14 +118,14 @@
                     
                     // آماده‌سازی و اجرای کوئری
                     $stmt = $conn->prepare("INSERT INTO users (first_name, last_name, national_code, birth_date, 
-                        gender, education, mobile, phone, email, emergency_contact, address, classes, skill_level, 
+                        gender, education, mobile, phone, email, password, emergency_contact, address, classes, skill_level, 
                         experience, has_health_issue, health_details, has_injury, injury_details, referral, goal, 
-                        comments, newsletter_agreement, registration_date) 
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                        comments, newsletter_agreement, registration_date, updated_at) 
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-                    $stmt->bind_param('sssssssssssssssssssssss', $firstName, $lastName, $nationalCode, $birthDate, $gender, $education, $mobile,
-                    $phone, $email, $emergencyContact, $address, $classesStr, $skillLevel, $experience, $hasHealthIssue, $healthDetails, $hasInjury,
-                    $injuryDetails, $referral, $goal, $comments, $newsletterAgreement, $reg_date);
+                    $stmt->bind_param('sssssssssssssssssssssssss', $firstName, $lastName, $nationalCode, $birthDate, $gender, $education, $mobile,
+                    $phone, $email, $hashed_password, $emergencyContact, $address, $classesStr, $skillLevel, $experience, $hasHealthIssue, $healthDetails, $hasInjury,
+                    $injuryDetails, $referral, $goal, $comments, $newsletterAgreement, $reg_date, date("Y/m/d H:i:s"));
                     
                     $stmt->execute();
                     
@@ -224,6 +226,11 @@
                         <label for="email" class="required-field">ایمیل</label>
                         <input type="email" id="email" name="email" required>
                         <div class="error-message">لطفاً ایمیل معتبر وارد کنید</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="required-field">رمز عبور</label>
+                        <input type="password" id="password" name="password" required>
+                        <div class="error-message">لطفاً رمز عبور وارد کنید</div>
                     </div>
                     <div class="form-group">
                         <label for="emergencyContact">شماره تماس اضطراری</label>

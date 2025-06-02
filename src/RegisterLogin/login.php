@@ -1,3 +1,30 @@
+<?php
+$error = "";
+require_once '../modules/database.php';
+$conn = new Database();
+$conn->getConnection();
+if (session_status() == PHP_SESSION_ACTIVE) {
+    if (isset($_SESSION['user_id'])) {
+        header('location: dashboard.php');
+        exit;
+    }
+}
+else
+{
+    session_start();
+}
+
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    $email = $_POST['emailaddr'];
+    $password = $_POST['password'];
+    if (empty($email) || empty($password)) {
+        $error = "لطفا ایمیل و رمز عبور را وارد کنید";
+    } else {
+        $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fa">
 <head>
@@ -59,9 +86,9 @@
         <div class="login-body">
             <form id="loginForm">
                 <div class="form-group">
-                    <label for="username">نام کاربری یا ایمیل</label>
+                    <label for="username">ایمیل</label>
                     <div class="input-group">
-                        <input type="text" id="username" name="username" required>
+                        <input type="text" id="username" name="emailaddr" required>
                         <i class="fas fa-user"></i>
                     </div>
                     <div class="error-message">لطفاً ایمیل خود را وارد کنید</div>
