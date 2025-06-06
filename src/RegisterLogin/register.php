@@ -117,7 +117,7 @@
                     $conn->getConnection();
                     
                     // آماده‌سازی و اجرای کوئری
-                    $stmt = $conn->prepare("INSERT INTO users (first_name, last_name, national_code, birth_date, 
+                    $stmt = $conn->prepare("INSERT INTO registrations (first_name, last_name, national_code, birth_date, 
                         gender, education, mobile, phone, email, password, emergency_contact, address, classes, skill_level, 
                         experience, has_health_issue, health_details, has_injury, injury_details, referral, goal, 
                         comments, newsletter_agreement, registration_date, updated_at) 
@@ -125,7 +125,7 @@
 
                     $stmt->bind_param('sssssssssssssssssssssssss', $firstName, $lastName, $nationalCode, $birthDate, $gender, $education, $mobile,
                     $phone, $email, $hashed_password, $emergencyContact, $address, $classesStr, $skillLevel, $experience, $hasHealthIssue, $healthDetails, $hasInjury,
-                    $injuryDetails, $referral, $goal, $comments, $newsletterAgreement, $reg_date, date("Y/m/d H:i:s"));
+                    $injuryDetails, $referral, $goal, $comments, $newsletterAgreement, $reg_date);
                     
                     $stmt->execute();
                     

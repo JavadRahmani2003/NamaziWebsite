@@ -7,7 +7,7 @@ return [
     'db_host' => 'localhost',
     'db_username' => 'root',
     'db_password' => '',
-    'db_name' => 'newsdatabase',
+    'db_name' => 'arian_razm',
     'db_charset' => 'utf8mb4',
     
     // تنظیمات اخبار
