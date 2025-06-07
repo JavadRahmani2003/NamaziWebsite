@@ -1,30 +1,3 @@
-<?php
-$error = "";
-require_once '../modules/database.php';
-$conn = new Database();
-$conn->getConnection();
-if (session_status() == PHP_SESSION_ACTIVE) {
-    if (isset($_SESSION['user_id'])) {
-        header('location: dashboard.php');
-        exit;
-    }
-}
-else
-{
-    session_start();
-}
-
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    $email = $_POST['emailaddr'];
-    $password = $_POST['password'];
-    if (empty($email) || empty($password)) {
-        $error = "لطفا ایمیل و رمز عبور را وارد کنید";
-    } else {
-        $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="fa">
 <head>
@@ -49,22 +22,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
         });
-        loadFooter();
-    }
-    function loadFooter() {
-        fetch('../footerSubFolder.html')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok ' + response.statusText);
-            }
-            return response.text();
-        })
-        .then(data => {
-            document.getElementById('footersite').innerHTML = data;
-        })
-        .catch(error => {
-            console.error('There was a problem with the fetch operation:', error);
-        });
     }
     window.onload = loadMenu;
     </script>
@@ -82,13 +39,63 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <h2>ورود به حساب کاربری</h2>
             <p>به باشگاه ورزشی آرین رزم خوش آمدید</p>
         </div>
-        
         <div class="login-body">
-            <form id="loginForm">
+            <?php
+            $error = [];
+            require_once '../modules/database.php';
+            $conn = new Database();
+            $conn->getConnection();
+            if (session_status() == PHP_SESSION_ACTIVE) {
+                if (isset($_SESSION['user_id'])) {
+                    header('location: dashboard.php');
+                    exit;
+                }
+            }
+            else
+            {
+                session_start();
+            }
+
+            if ($_SERVER['REQUEST_METHOD'] == "POST") {
+                $email = $_POST['emailaddr'];
+                $password = $_POST['password'];
+
+                if (empty($email) || empty($password)) {
+                    $error[] = "لطفا ایمیل و رمز عبور را وارد کنید";
+                } else {
+                    $stmt = $conn->prepare("SELECT * FROM registrations WHERE email = ? AND password = ?");
+                    $stmt->bind_param("ss",$email,$password);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    if ($result->num_rows > 0)
+                    {
+                        $user = $result->fetch_assoc();
+                        if (password_verify($password,$user['password']))
+                        {
+                            // ذخیره اطلاعات کاربر در جلسه
+                            $_SESSION['user_id'] = $user['id'];
+                            $_SESSION['username'] = $user['username'];
+                            $_SESSION['full_name'] = $user['first_name'] . ' ' . $user['last_name'];
+                            // ثبت زمان آخرین ورود
+                            $stmt = $conn->prepare("
+                                UPDATE users
+                                SET last_login = NOW()
+                                WHERE id = ?
+                            ");
+                            $stmt->bind_param("i", $user['id']);
+                            $stmt->execute();
+                            header('location: dashboard.php');
+                            exit;
+                        }
+                    }
+                }
+            }
+            ?>
+            <form id="loginForm" action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
                 <div class="form-group">
                     <label for="username">ایمیل</label>
                     <div class="input-group">
-                        <input type="text" id="username" name="emailaddr" required>
+                        <input type="text" id="username" name="emailaddr">
                         <i class="fas fa-user"></i>
                     </div>
                     <div class="error-message">لطفاً ایمیل خود را وارد کنید</div>
@@ -97,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 <div class="form-group">
                     <label for="password">رمز عبور</label>
                     <div class="input-group">
-                        <input type="password" id="password" name="password" required>
+                        <input type="password" id="password" name="password">
                         <i class="fas fa-lock"></i>
                     </div>
                     <div class="error-message">لطفاً رمز عبور خود را وارد کنید</div>
@@ -122,45 +129,45 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <script>
     // Form validation
     document.addEventListener('DOMContentLoaded', function() {
-        const loginForm = document.getElementById('loginForm');
+        // const loginForm = document.getElementById('loginForm');
         
-        loginForm.addEventListener('submit', function(e) {
-            e.preventDefault();
+        // loginForm.addEventListener('submit', function(e) {
+        //     e.preventDefault();
             
-            let isValid = true;
+        //     let isValid = true;
             
-            // Validate username
-            const username = document.getElementById('username');
-            if (!username.value.trim()) {
-                username.closest('.form-group').classList.add('error');
-                isValid = false;
-            } else {
-                username.closest('.form-group').classList.remove('error');
-            }
+        //     // Validate username
+        //     const username = document.getElementById('username');
+        //     if (!username.value.trim()) {
+        //         username.closest('.form-group').classList.add('error');
+        //         isValid = false;
+        //     } else {
+        //         username.closest('.form-group').classList.remove('error');
+        //     }
             
-            // Validate password
-            const password = document.getElementById('password');
-            if (!password.value.trim()) {
-                password.closest('.form-group').classList.add('error');
-                isValid = false;
-            } else {
-                password.closest('.form-group').classList.remove('error');
-            }
+        //     // Validate password
+        //     const password = document.getElementById('password');
+        //     if (!password.value.trim()) {
+        //         password.closest('.form-group').classList.add('error');
+        //         isValid = false;
+        //     } else {
+        //         password.closest('.form-group').classList.remove('error');
+        //     }
             
-            // If form is valid, redirect to dashboard
-            if (isValid) {
-                // In a real application, you would send the form data to the server for authentication
-                // For demo purposes, we'll just redirect to the dashboard
-                window.location.href = 'dashboard.html';
-            }
-        });
+        //     // If form is valid, redirect to dashboard
+        //     if (isValid) {
+        //         // In a real application, you would send the form data to the server for authentication
+        //         // For demo purposes, we'll just redirect to the dashboard
+        //         window.location.href = 'dashboard.php';
+        //     }
+        // });
         
         // Clear error on input
-        loginForm.querySelectorAll('input').forEach(function(input) {
-            input.addEventListener('input', function() {
-                this.closest('.form-group').classList.remove('error');
-            });
-        });
+        // loginForm.querySelectorAll('input').forEach(function(input) {
+        //     input.addEventListener('input', function() {
+        //         this.closest('.form-group').classList.remove('error');
+        //     });
+        // });
         
         // Toggle theme button
         const themeToggle = document.createElement('div');

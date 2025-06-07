@@ -121,9 +121,9 @@
                         gender, education, mobile, phone, email, password, emergency_contact, address, classes, skill_level, 
                         experience, has_health_issue, health_details, has_injury, injury_details, referral, goal, 
                         comments, newsletter_agreement, registration_date, updated_at) 
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())");
 
-                    $stmt->bind_param('sssssssssssssssssssssssss', $firstName, $lastName, $nationalCode, $birthDate, $gender, $education, $mobile,
+                    $stmt->bind_param('ssssssssssssssssssssssss', $firstName, $lastName, $nationalCode, $birthDate, $gender, $education, $mobile,
                     $phone, $email, $hashed_password, $emergencyContact, $address, $classesStr, $skillLevel, $experience, $hasHealthIssue, $healthDetails, $hasInjury,
                     $injuryDetails, $referral, $goal, $comments, $newsletterAgreement, $reg_date);
                     
