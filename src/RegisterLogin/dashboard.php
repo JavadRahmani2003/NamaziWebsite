@@ -71,7 +71,7 @@
         </div>
         
         <div class="sidebar-footer">
-            <a href="login.html" class="logout-btn">
+            <a href="logout.php" class="logout-btn">
                 <i class="fas fa-sign-out-alt"></i>
                 <span>خروج از حساب</span>
             </a>
