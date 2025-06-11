@@ -1,3 +1,8 @@
+<?php
+    require_once '../modules/database.php';
+    $conn = new Database();
+    $conn->getConnection();    
+?>
 <!DOCTYPE html>
 <html lang="fa">
 <head>
@@ -8,9 +13,7 @@
     <link rel="stylesheet" href="../indexStyle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-<?php
-    
-?>
+
 <body dir="rtl" id="lighttheme">
 
 <!-- Mobile Sidebar Toggle -->
