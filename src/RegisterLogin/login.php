@@ -1,3 +1,46 @@
+<?php
+session_start();
+require_once '../modules/database.php';
+
+$error_message = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = $_POST['email'] ?? '';
+    $password = $_POST['password'] ?? '';
+    
+    if ($email && $password) {
+        $db = new Database();
+        $conn = $db->getConnection();
+        
+        $email = $conn->real_escape_string($email);
+        
+        $query = "SELECT id, first_name, last_name, mobile, email password, status FROM registrations WHERE email = '$mobile' AND status = 'approved'";
+        $result = $conn->query($query);
+        
+        if ($result && $result->num_rows > 0) {
+            $user = $result->fetch_assoc();
+            
+            // بررسی رمز عبور (در صورتی که هش شده باشد از password_verify استفاده کنید)
+            if (password_verify($password, $user['password']) || $password === $user['password']) {
+                $_SESSION['customer_id'] = $user['id'];
+                $_SESSION['customer_name'] = $user['first_name'] . ' ' . $user['last_name'];
+                $_SESSION['customer_email'] = $user['email'];
+                
+                header('Location: customer-dashboard.php');
+                exit;
+            } else {
+                $error_message = 'رمز عبور اشتباه است.';
+            }
+        } else {
+            $error_message = 'کاربری با این شماره موبایل یافت نشد یا حساب شما هنوز تایید نشده است.';
+        }
+        
+        $conn->close();
+    } else {
+        $error_message = 'لطفاً تمام فیلدها را پر کنید.';
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="fa">
 <head>
@@ -41,7 +84,6 @@
         </div>
         <div class="login-body">
             <?php
-            session_start();
             $error = [];
 
             require_once '../modules/database.php';
@@ -50,7 +92,7 @@
 
             // اگر قبلاً وارد شده، انتقال به داشبورد
             if (isset($_SESSION['user_id'])) {
-                header('location: dashboard.php');
+                header('location: customer-dashboard.php');
                 exit;
             }
 
@@ -74,7 +116,7 @@
                             $_SESSION['email'] = $user['email'];
                             $_SESSION['full_name'] = $user['first_name'] . ' ' . $user['last_name'];
                             // ثبت آخرین ورود
-                            $stmt = $conn->prepare("UPDATE registrations SET last_login = NOW() WHERE id = ?");
+                            $stmt = $conn->prepare("UPDATE registrations SET updated_at = NOW() WHERE id = ?");
                             $stmt->bind_param("i", $user['id']);
                             $stmt->execute();
                             header('location: dashboard.php');
